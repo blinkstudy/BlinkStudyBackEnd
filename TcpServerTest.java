@@ -13,30 +13,30 @@ public class TcpServerTest {
     ServerSocket serverSocket = null;
      
     try {
-      // ¼­¹ö¼ÒÄÏÀ» »ı¼ºÇÏ°í 5000¹ø Æ÷Æ®¿Í °áÇÕ(bind) ½ÃÅ²´Ù.
+      // ì„œë²„ì†Œì¼“ì„ ìƒì„±í•˜ê³  5000ë²ˆ í¬íŠ¸ì™€ ê²°í•©(bind) ì‹œí‚¨ë‹¤.
       serverSocket = new ServerSocket(5000);
-      System.out.println(getTime() + " ¼­¹ö°¡ ÁØºñµÇ¾ú½À´Ï´Ù.");
+      System.out.println(" ì„œë²„ê°€ ì¤€ë¹„ë˜ì—ˆìŠµë‹ˆë‹¤.");
     } catch (IOException e) {
       e.printStackTrace();
     } // try - catch
      
     while (true) {
       try {
-        System.out.println(getTime() + " ¿¬°á¿äÃ»À» ±â´Ù¸³´Ï´Ù.");
-        // ¼­¹ö¼ÒÄÏÀº Å¬¶óÀÌ¾ğÆ®ÀÇ ¿¬°á¿äÃ»ÀÌ ¿Ã ¶§±îÁö ½ÇÇàÀ» ¸ØÃß°í °è¼Ó ±â´Ù¸°´Ù.
-        // Å¬¶óÀÌ¾ğÆ®ÀÇ ¿¬°á¿äÃ»ÀÌ ¿À¸é Å¬¶óÀÌ¾ğÆ® ¼ÒÄÏ°ú Åë½ÅÇÒ »õ·Î¿î ¼ÒÄÏÀ» »ı¼ºÇÑ´Ù.
+        System.out.println(" ì—°ê²°ìš”ì²­ì„ ê¸°ë‹¤ë¦½ë‹ˆë‹¤.");
+        // ì„œë²„ì†Œì¼“ì€ í´ë¼ì´ì–¸íŠ¸ì˜ ì—°ê²°ìš”ì²­ì´ ì˜¬ ë•Œê¹Œì§€ ì‹¤í–‰ì„ ë©ˆì¶”ê³  ê³„ì† ê¸°ë‹¤ë¦°ë‹¤.
+        // í´ë¼ì´ì–¸íŠ¸ì˜ ì—°ê²°ìš”ì²­ì´ ì˜¤ë©´ í´ë¼ì´ì–¸íŠ¸ ì†Œì¼“ê³¼ í†µì‹ í•  ìƒˆë¡œìš´ ì†Œì¼“ì„ ìƒì„±í•œë‹¤.
         Socket socket = serverSocket.accept();
-        System.out.println(getTime() + socket.getInetAddress() + " ·ÎºÎÅÍ ¿¬°á¿äÃ»ÀÌ µé¾î¿Ô½À´Ï´Ù.");
+        System.out.println(socket.getInetAddress() + " ë¡œë¶€í„° ì—°ê²°ìš”ì²­ì´ ë“¤ì–´ì™”ìŠµë‹ˆë‹¤.");
          
-        // ¼ÒÄÏÀÇ Ãâ·Â½ºÆ®¸²À» ¾ò´Â´Ù.
+        // ì†Œì¼“ì˜ ì¶œë ¥ìŠ¤íŠ¸ë¦¼ì„ ì–»ëŠ”ë‹¤.
         OutputStream out = socket.getOutputStream();
-        DataOutputStream dos = new DataOutputStream(out); // ±âº»Çü ´ÜÀ§·Î Ã³¸®ÇÏ´Â º¸Á¶½ºÆ®¸²
+        DataOutputStream dos = new DataOutputStream(out); // ê¸°ë³¸í˜• ë‹¨ìœ„ë¡œ ì²˜ë¦¬í•˜ëŠ” ë³´ì¡°ìŠ¤íŠ¸ë¦¼
          
-        // ¿ø°İ ¼ÒÄÏ(remote socket)¿¡ µ¥ÀÌÅÍ¸¦ º¸³½´Ù.
-        dos.writeUTF("¼­¹ö·ÎºÎÅÍÀÇ ¸Ş¼¼ÁöÀÔ´Ï´Ù.");
-        System.out.println(getTime() + " µ¥ÀÌÅÍ¸¦ Àü¼ÛÇß½À´Ï´Ù.");
+        // ì›ê²© ì†Œì¼“(remote socket)ì— ë°ì´í„°ë¥¼ ë³´ë‚¸ë‹¤.
+        dos.writeUTF("ì„œë²„ë¡œë¶€í„°ì˜ ë©”ì„¸ì§€ì…ë‹ˆë‹¤.");
+        System.out.println" ë°ì´í„°ë¥¼ ì „ì†¡í–ˆìŠµë‹ˆë‹¤.");
          
-        // ½ºÆ®¸²°ú ¼ÒÄÏÀ» ´Ş¾ÆÁØ´Ù.
+        // ìŠ¤íŠ¸ë¦¼ê³¼ ì†Œì¼“ì„ ë‹¬ì•„ì¤€ë‹¤.
         dos.close();
         socket.close();
       } catch (IOException e) {
@@ -45,10 +45,6 @@ public class TcpServerTest {
     } // while
   } // main
    
-  static String getTime() {
-    SimpleDateFormat f = new SimpleDateFormat("[hh:mm:ss]");
-    return f.format(new Date());
-  } // getTime
 } // TcpServerTest
 
 

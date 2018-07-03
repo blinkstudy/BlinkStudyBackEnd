@@ -8,31 +8,31 @@ public class EchoServer {
 
 	public static void main(String[] args) {
 		try {
-			// 1. 10001¹ø Æ÷Æ®¿¡¼­ µ¿ÀÛÇÏ´Â ServerSocketÀ» »ı¼º
+			// 1. 10001ë²ˆ í¬íŠ¸ì—ì„œ ë™ì‘í•˜ëŠ” ServerSocketì„ ìƒì„±
 			ServerSocket server = new ServerSocket(10001);
 			System.out.println("Wating Connect ..");
-			// 2. ServerSocketÀÇ accept() ¸Ş¼Òµå¸¦ ½ÇÇàÇØ¼­ Å¬¶óÀÌ¾ğÆ®ÀÇ Á¢¼ÓÀ» ´ë±â
-			// : Å¬¶óÀÌ¾ğÆ®°¡ Á¢¼ÓÇÒ °æ¿ì accept() ¸Ş¼Òµå´Â Socket °´Ã¼¸¦ ¹İÈ¯
+			// 2. ServerSocketì˜ accept() ë©”ì†Œë“œë¥¼ ì‹¤í–‰í•´ì„œ í´ë¼ì´ì–¸íŠ¸ì˜ ì ‘ì†ì„ ëŒ€ê¸°
+			// : í´ë¼ì´ì–¸íŠ¸ê°€ ì ‘ì†í•  ê²½ìš° accept() ë©”ì†Œë“œëŠ” Socket ê°ì²´ë¥¼ ë°˜í™˜
 			Socket sock = server.accept();
 			InetAddress inetaddr = sock.getInetAddress();
-			System.out.println(inetaddr.getHostAddress() + " ·ÎºÎÅÍ Á¢¼ÓÇß½À´Ï´Ù.");
-			// 3. ¹İÈ¯¹ŞÀº SocketÀ¸·ÎºÎÅÍ InputStream°ú OutputStreamÀ» ±¸ÇÔ
+			System.out.println(inetaddr.getHostAddress() + " ë¡œë¶€í„° ì ‘ì†í–ˆìŠµë‹ˆë‹¤.");
+			// 3. ë°˜í™˜ë°›ì€ Socketìœ¼ë¡œë¶€í„° InputStreamê³¼ OutputStreamì„ êµ¬í•¨
 			OutputStream out = sock.getOutputStream();
 			InputStream in = sock.getInputStream();
-			// 4. InputStreamÀº BufferedReader Çü½ÄÀ¸·Î º¯È¯
-			// OutputStreamÀº PrintWriter Çü½ÄÀ¸·Î º¯È¯
+			// 4. InputStreamì€ BufferedReader í˜•ì‹ìœ¼ë¡œ ë³€í™˜
+			// OutputStreamì€ PrintWriter í˜•ì‹ìœ¼ë¡œ ë³€í™˜
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String line = null;
-			// 5. BufferedReaderÀÇ readLine() ¸Ş¼Òµå¸¦ ÀÌ¿ëÇØ
-			// Å¬¶óÀÌ¾ğÆ®°¡ º¸³»´Â ¹®ÀÚ¿­ ÇÑ ÁÙÀ» ÀĞ¾îµéÀÓ
+			// 5. BufferedReaderì˜ readLine() ë©”ì†Œë“œë¥¼ ì´ìš©í•´
+			// í´ë¼ì´ì–¸íŠ¸ê°€ ë³´ë‚´ëŠ” ë¬¸ìì—´ í•œ ì¤„ì„ ì½ì–´ë“¤ì„
 			while ((line = br.readLine()) != null) {
-				System.out.println("Å¬¶óÀÌ¾ğÆ®·ÎºÎÅÍ Àü¼Û¹ŞÀº ¹®ÀÚ¿­ : " + line);
-				// 6. PrintWriterÀÇ printlnÀ» ÀÌ¿ëÇØ ´Ù½Ã Å¬¶óÀÌ¾ğÆ®·Î Àü¼Û
+				System.out.println("í´ë¼ì´ì–¸íŠ¸ë¡œë¶€í„° ì „ì†¡ë°›ì€ ë¬¸ìì—´ : " + line);
+				// 6. PrintWriterì˜ printlnì„ ì´ìš©í•´ ë‹¤ì‹œ í´ë¼ì´ì–¸íŠ¸ë¡œ ì „ì†¡
 				pw.println(line);
 				pw.flush();
 			}
-			// 6. IO °´Ã¼¿Í ¼ÒÄÏÀÇ close() ¸Ş¼Òµå È£Ãâ
+			// 6. IO ê°ì²´ì™€ ì†Œì¼“ì˜ close() ë©”ì†Œë“œ í˜¸ì¶œ í•˜ê³  ì‘ì—…ì„ ì¢…ë£Œí•œë‹¤
 			pw.close();
 			br.close();
 			sock.close();

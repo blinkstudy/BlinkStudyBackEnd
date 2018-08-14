@@ -22,22 +22,9 @@ public class ConnectDB {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcUrl, dbId, dbPw);
 
-            if(resultSet.next()) {
-                if(resultSet.getString("ID").equals(id)
-                        && resultSet.getString("password").equals(password)) {
-                    returns = "success";
-                } else {
-                    returns = "fail";
-                }
-            } else {
-                returns = "noId";
-            }
-
         } catch (Exception e) {
 
         } finally {
-            if(resultSet != null) try { resultSet.close(); } catch (SQLException e){ }
-            if(preparedStatement != null) try { preparedStatement.close(); } catch (SQLException e){ }
             if(connection != null) try { connection.close(); } catch (SQLException e){ }
         }
         return returns;

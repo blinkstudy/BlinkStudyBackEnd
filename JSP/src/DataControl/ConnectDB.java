@@ -15,20 +15,12 @@ public class ConnectDB {
     private String dbId = "root"; // DB id
     private String dbPw = "sda1628sda"; // DB password
     private Connection connection = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
-    private String query = "";
     String returns = "";
 
     public String loginDB(String id, String password) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcUrl, dbId, dbPw);
-            query = "SELECT id,pw FROM UserInfo WHERE id=? and pw?";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, id);
-            preparedStatement.setString(2, password);
-            resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()) {
                 if(resultSet.getString("ID").equals(id)

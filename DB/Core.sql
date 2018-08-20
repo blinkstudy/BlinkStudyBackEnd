@@ -3,7 +3,7 @@ CREATE DATABASE Core;
 CREATE TABLE UserInfo
 (
   ID VARCHAR(50) PRIMARY KEY NOT NULL,
-  interest INT NOT NULL,
+  interest VARCHAR(20) NOT NULL,
   password VARCHAR(20) NOT NULL,
   currentPoint INT DEFAULT 0,
   wrongCount INT DEFAULT 0,
